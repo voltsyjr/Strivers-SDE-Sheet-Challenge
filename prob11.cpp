@@ -1,40 +1,12 @@
 #include<bits/stdc++.h>
-long long merge(long long *arr,vector<long long>&temp,long long l,long long m,long long r){
-long long counts=0;
-long long i=l,j=m,k=l;
-while(i<m and j<=r){
-if(arr[i]<arr[j]){
-temp[k]=arr[i];
-k++;i++;
-}else{
-temp[k]=arr[j];
-counts+=m-i;
-j++;k++;
+pair<int,int>missingAndRepeating(vector<int>&arr,int n){
+long long int rsum=0,rsq=0,sum=n*(n+1)/2,sq=n*(n+1)* (2*n+1)/6;
+for(auto it:arr){
+rsum+=it;
+rsq+=it*it;
 }
-}
-while(i<m){
-temp[k]=arr[i];
-k++;i++;
-}
-while(j<=r){
-temp[k]=arr[j];
-k++;j++;
-}
-for(long long i=l;i<=r;i++){
-arr[i]=temp[i];
-}
-return counts;
-}
-long long mergeSort(long long *arr,vector<long long>&temp,long long l,long long r){
-long long counts=0,mid=(l+r)/2;
-if(r>l){
-counts+=mergeSort(arr,temp,l,mid);
-counts+=mergeSort(arr,temp,mid+1,r);
-counts+=merge(arr,temp,l,mid+1,r);
-}
-return counts;
-}
-long long getInversions(long long *arr,int n){
-vector<long long> temp(n+1,0);
-return mergeSort(arr,temp,0,n-1);
+int m,r;
+m=((sq-rsq)/(sum-rsum)+(sum-rsum))/2;
+r=m-(sum-rsum);
+return {m,r};
 }
