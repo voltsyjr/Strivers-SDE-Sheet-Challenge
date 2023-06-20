@@ -1,17 +1,31 @@
 #include<bits/stdc++.h>
-long getTrappedWater(long *arr,int n){
-long l=0,r=n-1,lm=0,rm=0,ans=0;
-while(l<=r){
-if(arr[l]<=arr[r]){
-if(arr[l]>=lm)lm=arr[l];
-else ans+=lm-arr[l];
+vector<vector<int>>findTriplets(vector<int>arr,int n,int k){
+vector<vector<int>>ans;
+sort(arr.begin(),arr.end());
+int i=0;
+while(i<n-3){
+int l=i+1,r=n-1;
+while(l<r){
+	long long sum=arr[i]+arr[l]+arr[r];
+if(sum==k){
+ans.push_back({arr[i],arr[l],arr[r]});
+while(l<r and arr[l]==arr[l+1])l++;
 l++;
+while(r>l and arr[r]==arr[r-1])r--;
+r--;
 }//end if
+else if(sum<k){
+while(l<r and arr[l]==arr[l+1])l++;
+l++;
+}//end else if
 else{
-if(arr[r]>=rm)rm=arr[r];
-else ans+=rm-arr[r];
+while(r>l and arr[r]==arr[r-1])r--;
 r--;
 }//end else
-}//end while
+}
+
+while(i<n-3 and arr[i]==arr[i+1])i++;
+i++;
+}
 return ans;
 }

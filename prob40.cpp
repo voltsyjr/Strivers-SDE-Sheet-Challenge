@@ -1,11 +1,17 @@
-int removeDuplicates(vector<int> &arr,int n){
-if(n==0 or n==1)return n;
-int i=0;
-for(int j=1;j<n;j++){
-if(arr[j]!=arr[i]){
-arr[i+1]=arr[j];
-i++;
-}
-}
-return i+1;
+#include<bits/stdc++.h>
+long getTrappedWater(long *arr,int n){
+long l=0,r=n-1,lm=0,rm=0,ans=0;
+while(l<=r){
+if(arr[l]<=arr[r]){
+if(arr[l]>=lm)lm=arr[l];
+else ans+=lm-arr[l];
+l++;
+}//end if
+else{
+if(arr[r]>=rm)rm=arr[r];
+else ans+=rm-arr[r];
+r--;
+}//end else
+}//end while
+return ans;
 }
