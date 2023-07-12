@@ -9,6 +9,8 @@
         "regex": "cpp",
         "utility": "cpp",
         "deque": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "list": "cpp",
+        "forward_list": "cpp"
     }
 }
